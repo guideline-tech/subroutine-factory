@@ -11,11 +11,16 @@ module Subroutine
       def initialize(options)
         @options = options || {}
         inherit_from(@options[:parent])
+
+        op(@options[:op]) if @options[:op]
         @options[:inputs] ||= {}
+        @options[:inputs].each_pair(&method(:input))
+        @options[:befores] ||= []
+        @options[:afters] ||= []
       end
 
       def validate!
-        unless @options[:op] raise "Missing op configuration"
+        raise "Missing op configuration" unless @options[:op]
       end
 
       def op(op_class)
@@ -27,6 +32,14 @@ module Subroutine
         else
           op_class.to_s
         end
+      end
+
+      def before(&block)
+        @options[:befores].push(block)
+      end
+
+      def after(&block)
+        @options[:afters].push(block)
       end
 
       def input(name, value)
@@ -48,6 +61,8 @@ module Subroutine
         return unless parent
         parent = ::Subroutine::Factory.get_config!(parent) unless parent.is_a?(::Subroutine::Factory::Config)
         @options.deep_merge!(parent.options)
+        @options[:befores] = @options[:befores].dup
+        @options[:afters] = @options[:afters].dup
       end
 
     end

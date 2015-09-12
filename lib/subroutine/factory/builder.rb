@@ -11,8 +11,12 @@ module Subroutine
       end
 
       def execute!
-        op = op_class.submit!(*input_args)
-        extract_output(op)
+        op = op_class.new(*input_args)
+        @options[:befores].each{|block| block.call(op) }
+        op.submit!
+        output = extract_output(op)
+        @options[:afters].each{|block| block.call(op, output) }
+        output
       end
 
       protected
@@ -46,7 +50,7 @@ module Subroutine
       def extract_output(op)
         if @options[:output]
           return op.send(@options[:output])
-        else @options[:outputs]
+        elsif @options[:outputs]
           @options[:outputs].inject({}){|out, output| out[output] = op.send(output); out }
         else
           op
