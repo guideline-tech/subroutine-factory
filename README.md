@@ -65,7 +65,7 @@ Spec / Test Helper:
 config.include ::Subroutine::Factory::SpecHelper
 
 # in your tests
-user = factory(:user)
+user = factory(:signup)
 ```
 
 ## Development
