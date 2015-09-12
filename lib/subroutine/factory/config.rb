@@ -10,13 +10,20 @@ module Subroutine
 
       def initialize(options)
         @options = options || {}
-        inherit_from(@options[:parent])
+
+        parent(@options[:parent]) if @options[:parent]
 
         op(@options[:op]) if @options[:op]
+
         @options[:inputs] ||= {}
         @options[:inputs].each_pair(&method(:input))
+
         @options[:befores] ||= []
         @options[:afters] ||= []
+      end
+
+      def parent(parent)
+        inherit_from(parent)
       end
 
       def validate!
@@ -58,7 +65,6 @@ module Subroutine
       end
 
       def inherit_from(parent)
-        return unless parent
         parent = ::Subroutine::Factory.get_config!(parent) unless parent.is_a?(::Subroutine::Factory::Config)
         @options.deep_merge!(parent.options)
         @options[:befores] = @options[:befores].dup
