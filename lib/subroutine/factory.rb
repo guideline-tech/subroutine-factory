@@ -14,6 +14,7 @@ module Subroutine
       config = ::Subroutine::Factory::Config.new(options)
       @@configs[name.to_sym] = config
       config.instance_eval(&block) if block_given?
+      config.validate!
       config
     end
 
