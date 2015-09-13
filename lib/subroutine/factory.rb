@@ -8,7 +8,7 @@ module Subroutine
   module Factory
 
     @@configs = {}
-    @@sequence = 1
+    @@sequence = 0
 
     def self.configs
       @@configs
@@ -47,6 +47,10 @@ module Subroutine
       else
         @@sequence += 1
       end
+    end
+
+    def self.set_sequence(n)
+      @@sequence = n
     end
 
   end
