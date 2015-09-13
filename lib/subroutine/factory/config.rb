@@ -11,15 +11,9 @@ module Subroutine
       def initialize(options)
         @options = options || {}
 
-        parent(@options[:parent]) if @options[:parent]
+        parent(@options.delete(:parent)) if @options[:parent]
 
-        op(@options[:op]) if @options[:op]
-
-        @options[:inputs] ||= {}
-        @options[:inputs].each_pair(&method(:input))
-
-        @options[:befores] ||= []
-        @options[:afters] ||= []
+        sanitize!
       end
 
       def parent(parent)
@@ -60,15 +54,28 @@ module Subroutine
 
       def outputs(*names)
         @options.delete(:output)
-        @options[:outputs] ||= []
-        @options[:outputs] |= names
+        @options[:outputs] = names
       end
+
+      protected
 
       def inherit_from(parent)
         parent = ::Subroutine::Factory.get_config!(parent) unless parent.is_a?(::Subroutine::Factory::Config)
         @options.deep_merge!(parent.options)
-        @options[:befores] = @options[:befores].dup
-        @options[:afters] = @options[:afters].dup
+        sanitize!
+      end
+
+      def sanitize!
+        op(@options[:op]) if @options[:op]
+
+        @options[:inputs] ||= {}
+        @options[:inputs].each_pair(&method(:input))
+
+        outputs(*@options[:outputs]) if @options[:outputs]
+        output(@options[:output]) if @options[:output]
+
+        @options[:befores] = @options[:befores].dup if @options[:befores]
+        @options[:afters] = @options[:afters].dup if @options[:afters]
       end
 
     end

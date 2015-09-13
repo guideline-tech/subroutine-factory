@@ -12,10 +12,10 @@ module Subroutine
 
       def execute!
         op = op_class.new(*input_args)
-        @options[:befores].each{|block| block.call(op) }
+        Array(@options[:befores]).each{|block| block.call(op) }
         op.submit!
         output = extract_output(op)
-        @options[:afters].each{|block| block.call(op, output) }
+        Array(@options[:afters]).each{|block| block.call(op, output) }
         output
       end
 
@@ -51,7 +51,11 @@ module Subroutine
         if @options[:output]
           return op.send(@options[:output])
         elsif @options[:outputs]
-          @options[:outputs].inject({}){|out, output| out[output] = op.send(output); out }
+          if @options[:outputs].length == 1 && @options[:outputs][0].is_a?(Array)
+            @options[:outputs][0].map{|output| op.send(output) }
+          else
+            @options[:outputs].inject({}){|out, output| out[output] = op.send(output); out }
+          end
         else
           op
         end

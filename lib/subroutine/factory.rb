@@ -10,6 +10,10 @@ module Subroutine
     @@configs = {}
     @@sequence = 1
 
+    def self.configs
+      @@configs
+    end
+
     def self.define(name, options = {}, &block)
       config = ::Subroutine::Factory::Config.new(options)
       @@configs[name.to_sym] = config
@@ -34,9 +38,15 @@ module Subroutine
       builder.execute!
     end
 
-    def self.sequence(lambda)
-      i = ++@@sequence
-      Proc.new{ lambda.call(i) }
+    def self.sequence(&lambda)
+      if block_given?
+        Proc.new{
+          @@sequence += 1
+          lambda.call(@@sequence)
+        }
+      else
+        @@sequence += 1
+      end
     end
 
   end
