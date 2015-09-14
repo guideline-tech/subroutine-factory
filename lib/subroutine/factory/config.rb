@@ -75,7 +75,9 @@ module Subroutine
         output(@options[:output]) if @options[:output]
 
         @options[:befores] = @options[:befores].dup if @options[:befores]
+        @options[:befores] ||= []
         @options[:afters] = @options[:afters].dup if @options[:afters]
+        @options[:afters] ||= []
       end
 
     end
