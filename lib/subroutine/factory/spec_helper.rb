@@ -1,6 +1,7 @@
 module Subroutine
   module Factory
     module SpecHelper
+
       def factory(*args)
         ::Subroutine::Factory.create(*args)
       end
@@ -8,6 +9,11 @@ module Subroutine
       def factory!(*args)
         factory(*args)
       end
+
+      def factory_inputs(*args)
+        ::Subroutine::Factory.inputs(*args)
+      end
+
     end
   end
 end
