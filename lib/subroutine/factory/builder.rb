@@ -8,6 +8,7 @@ module Subroutine
         @config = config
         @options = config.options
         @args = args
+        @overrides = @args.extract_options!
       end
 
       def execute!
@@ -19,32 +20,28 @@ module Subroutine
         output
       end
 
-      protected
-
-      def op_class
-        klass = @options[:op].constantize
-      end
-
-      def input_args
-        args = @args.dup
-        overrides = args.extract_options!
-        inputs = build_inputs(overrides)
-
-        args.push(inputs)
-        args
-      end
-
-      def build_inputs(overrides)
+      def inputs
         out = {}
+
         @options[:inputs].each_pair do |k,v|
-          if overrides.has_key?(k)
-            out[k] = overrides[k]
+          if @overrides.has_key?(k)
+            out[k] = @overrides[k]
           else
             out[k] = v.respond_to?(:call) ? v.call : v
           end
         end
 
         out
+      end
+
+      def input_args
+        args = @args.dup
+        args.push(inputs)
+        args
+      end
+
+      def op_class
+        klass = @options[:op].constantize
       end
 
       def extract_output(op)

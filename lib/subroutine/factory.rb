@@ -33,9 +33,16 @@ module Subroutine
     end
 
     def self.create(name, *args)
+      builder(name, *args).execute!
+    end
+
+    def self.inputs(name, *args)
+      builder(name, *args).inputs
+    end
+
+    def self.builder(name, *args)
       config = get_config!(name)
-      builder = ::Subroutine::Factory::Builder.new(config, *args)
-      builder.execute!
+      ::Subroutine::Factory::Builder.new(config, *args)
     end
 
     def self.sequence(&lambda)
