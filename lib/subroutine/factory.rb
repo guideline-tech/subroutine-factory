@@ -47,9 +47,9 @@ module Subroutine
 
     def self.sequence(&lambda)
       if block_given?
-        Proc.new{
+        Proc.new{|*options|
           @@sequence += 1
-          lambda.call(@@sequence)
+          lambda.call(*[@@sequence, *options].compact)
         }
       else
         @@sequence += 1

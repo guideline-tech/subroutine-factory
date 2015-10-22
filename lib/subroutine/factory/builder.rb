@@ -6,17 +6,28 @@ module Subroutine
 
       def initialize(config, *args)
         @config = config
-        @options = config.options
-        @args = args
+        @options = config.options.dup
+        @args = args.dup
         @overrides = @args.extract_options!
       end
 
       def execute!
-        op = op_class.new(*input_args)
-        Array(@options[:befores]).each{|block| block.call(op) }
+        args = @args.dup
+
+        Array(@options[:setups]).each{|block| block.call(args, @options) }
+
+        args.push(inputs)
+
+        op = op_class.new(*args)
+
+        Array(@options[:befores]).each{|block| block.call(op, @options) }
+
         op.submit!
+
         output = extract_output(op)
-        Array(@options[:afters]).each{|block| block.call(op, output) }
+
+        Array(@options[:afters]).each{|block| block.call(op, output, @options) }
+
         output
       end
 
@@ -27,17 +38,16 @@ module Subroutine
           if @overrides.has_key?(k)
             out[k] = @overrides[k]
           else
-            out[k] = v.respond_to?(:call) ? v.call : v
+            out[k] = invoke_input(v)
           end
         end
 
         out
       end
 
-      def input_args
-        args = @args.dup
-        args.push(inputs)
-        args
+      def invoke_input(input)
+        return input unless input.respond_to?(:call)
+        input.arity.zero? ? input.call : input.call(@options)
       end
 
       def op_class

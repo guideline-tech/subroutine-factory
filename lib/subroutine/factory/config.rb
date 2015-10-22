@@ -35,6 +35,10 @@ module Subroutine
         end
       end
 
+      def setup(&block)
+        @options[:setups].push(block)
+      end
+
       def before(&block)
         @options[:befores].push(block)
       end
@@ -74,8 +78,12 @@ module Subroutine
         outputs(*@options[:outputs]) if @options[:outputs]
         output(@options[:output]) if @options[:output]
 
+        @options[:setups] = @options[:setups].dup if @options[:setups]
+        @options[:setups] ||= []
+
         @options[:befores] = @options[:befores].dup if @options[:befores]
         @options[:befores] ||= []
+
         @options[:afters] = @options[:afters].dup if @options[:afters]
         @options[:afters] ||= []
       end
