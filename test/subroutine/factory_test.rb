@@ -3,7 +3,7 @@ require 'test_helper'
 class Subroutine::FactoryTest < Minitest::Test
 
   def setup
-    base = ::Subroutine::Factory.set_sequence(0)
+    ::Subroutine::Factory.set_sequence(0)
   end
 
   def test_it_registers_factories

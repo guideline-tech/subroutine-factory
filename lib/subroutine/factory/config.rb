@@ -61,6 +61,10 @@ module Subroutine
         @options[:outputs] = names
       end
 
+      def extra(name, value = nil)
+        @options[:extras][name.to_sym] = value
+      end
+
       protected
 
       def inherit_from(parent)
@@ -73,7 +77,7 @@ module Subroutine
         op(@options[:op]) if @options[:op]
 
         @options[:inputs] ||= {}
-        @options[:inputs].each_pair(&method(:input))
+        @options[:inputs].each_pair{|k,v| input(k, v) }
 
         outputs(*@options[:outputs]) if @options[:outputs]
         output(@options[:output]) if @options[:output]
@@ -86,6 +90,9 @@ module Subroutine
 
         @options[:afters] = @options[:afters].dup if @options[:afters]
         @options[:afters] ||= []
+
+        @options[:extras] ||= {}
+        @options[:extras].each_pair{|k,v| extra(k,v) }
       end
 
     end
