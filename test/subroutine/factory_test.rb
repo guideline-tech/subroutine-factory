@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class Subroutine::FactoryTest < Minitest::Test
 
@@ -9,7 +11,7 @@ class Subroutine::FactoryTest < Minitest::Test
   def test_it_registers_factories
     require "support/factories"
 
-    assert_equal 4, ::Subroutine::Factory::configs.length
+    assert_equal 5, ::Subroutine::Factory.configs.length
   end
 
   def test_it_enables_ops_to_be_wrapped_with_simple_factories
@@ -26,14 +28,22 @@ class Subroutine::FactoryTest < Minitest::Test
   end
 
   def test_it_blows_up_if_invalid_data_is_supplied
-    assert_raises(Subroutine::Failure) {
-      Subroutine::Factory.create(:signup, {email: nil})
-    }
+    assert_raises(Subroutine::Failure) do
+      Subroutine::Factory.create(:signup, { email: nil })
+    end
   end
 
   def test_it_allows_data_to_be_sequenced
     assert_equal "foo1@example.com", Subroutine::Factory.create(:user_signup)[:email]
     assert_equal "foo2@example.com", Subroutine::Factory.create(:user_signup)[:email]
+  end
+
+  def test_it_allows_data_to_be_randomize
+    a = Subroutine::Factory.create(:random_signup)[:email]
+    b = Subroutine::Factory.create(:random_signup)[:email]
+    assert_match(/foo[a-z0-9A-Z]{8}@example\.com/, a)
+    assert_match(/foo[a-z0-9A-Z]{8}@example\.com/, b)
+    refute_equal(a, b)
   end
 
   def test_it_allows_factories_to_inherit_configs_from_parents

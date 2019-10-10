@@ -1,4 +1,7 @@
-require 'subroutine'
+# frozen_string_literal: true
+
+require "securerandom"
+require "subroutine"
 require "subroutine/factory/version"
 require "subroutine/factory/config"
 require "subroutine/factory/builder"
@@ -29,7 +32,8 @@ module Subroutine
     def self.get_config!(name)
       config = get_config(name)
       raise "Unknown Subroutine::Factory `#{name}`" unless config
-      return config
+
+      config
     end
 
     def self.create(name, *args)
@@ -47,12 +51,23 @@ module Subroutine
 
     def self.sequence(&lambda)
       if block_given?
-        Proc.new{|*options|
+        proc do |*options|
           @@sequence += 1
           lambda.call(*[@@sequence, *options].compact)
-        }
+        end
       else
         @@sequence += 1
+      end
+    end
+
+    def self.random(length: 8, &lambda)
+      if block_given?
+        proc  do |*options|
+          x = ::SecureRandom.hex[0...length]
+          lambda.call(*[x, *options].compact)
+        end
+      else
+        ::SecureRandom.hex[0...length]
       end
     end
 
