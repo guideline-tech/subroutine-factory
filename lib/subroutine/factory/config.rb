@@ -5,6 +5,7 @@ module Subroutine
     class Config
 
       delegate :sequence, to: "::Subroutine::Factory"
+      delegate :random, to: "::Subroutine::Factory"
 
       attr_reader :options
 
