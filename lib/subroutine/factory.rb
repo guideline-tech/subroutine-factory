@@ -60,14 +60,36 @@ module Subroutine
       end
     end
 
-    def self.random(length: 8, &lambda)
+    def self.random(random_options = {}, &lambda)
       if block_given?
-        proc  do |*options|
-          x = ::SecureRandom.hex[0...length]
+        proc do |*options|
+          x = build_random(random_options)
           lambda.call(*[x, *options].compact)
         end
       else
-        ::SecureRandom.hex[0...length]
+        build_random(random_options)
+      end
+    end
+
+    RANDOM_FUNCTION_TYPES = %i[alphanumeric numeric alpha]
+    ALPHAS = ("a".."z").to_a
+    NUMERICS = (0..9).to_a
+    ALPHANUMERICS = NUMERICS + ALPHAS
+    def self.build_random(length: 8, type: :alphanumeric)
+      raise ArgumentError, ":type must be one of #{RANDOM_FUNCTION_TYPES.inspect}" unless RANDOM_FUNCTION_TYPES.include?(type.to_sym)
+
+      source = (
+        case type.to_sym
+        when :alphanumeric then ALPHANUMERICS
+        when :numeric then NUMERICS
+        when :alpha then ALPHAS
+        end
+      )
+
+      length.times.inject(+"") do |memo, _i|
+        x = source.sample.to_s
+        x = x.upcase if rand(2) == 1
+        memo << x
       end
     end
 
