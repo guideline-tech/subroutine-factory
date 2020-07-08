@@ -88,7 +88,6 @@ module Subroutine
 
       length.times.inject(+"") do |memo, _i|
         x = source.sample.to_s
-        x = x.upcase if rand(2) == 1
         memo << x
       end
     end
