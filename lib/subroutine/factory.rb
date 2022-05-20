@@ -63,7 +63,7 @@ module Subroutine
     def self.random(random_options = {}, &lambda)
       if block_given?
         proc do |*options|
-          x = build_random(random_options)
+          x = build_random(**random_options)
           lambda.call(*[x, *options].compact)
         end
       else
