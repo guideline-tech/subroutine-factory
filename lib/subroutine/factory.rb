@@ -63,11 +63,11 @@ module Subroutine
     def self.random(random_options = {}, &lambda)
       if block_given?
         proc do |*options|
-          x = build_random(random_options)
+          x = build_random(**random_options)
           lambda.call(*[x, *options].compact)
         end
       else
-        build_random(random_options)
+        build_random(**random_options)
       end
     end
 
@@ -75,6 +75,7 @@ module Subroutine
     ALPHAS = ("a".."z").to_a
     NUMERICS = (0..9).to_a
     ALPHANUMERICS = NUMERICS + ALPHAS
+
     def self.build_random(length: 8, type: :alphanumeric)
       raise ArgumentError, ":type must be one of #{RANDOM_FUNCTION_TYPES.inspect}" unless RANDOM_FUNCTION_TYPES.include?(type.to_sym)
 
