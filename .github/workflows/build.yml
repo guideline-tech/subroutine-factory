@@ -1,0 +1,26 @@
+name: build
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version: [3.2, 3.3, 3.4]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: "false"
+      - name: get bundler version
+        run: echo "BUNDLER=$(cat .bundler-version)" >> $GITHUB_ENV
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler: ${{ env.BUNDLER }}
+          bundler-cache: true
+      - run: bundle install
+      - run: bundle exec rake test
