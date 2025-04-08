@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Test factories for ops using Subroutine Ops}
   spec.description   = %q{Test factories for ops using Subroutine Ops}
-  spec.homepage      = "https://github.com/mnelson/subroutine-factory"
+  spec.homepage      = "https://github.com/guideline-tech/subroutine-factory"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
