@@ -53,7 +53,7 @@ GEM
       mutex_m
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uri (1.0.3)
+    uri (1.0.4)
 
 PLATFORMS
   arm64-darwin-24
