@@ -41,7 +41,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     mutex_m (0.3.0)
-    rake (13.3.0)
+    rake (13.3.1)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
     subroutine (4.5.0)
