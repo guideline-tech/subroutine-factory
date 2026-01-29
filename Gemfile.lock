@@ -42,7 +42,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     mutex_m (0.3.0)
-    prism (1.8.0)
+    prism (1.9.0)
     rake (13.3.1)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
@@ -69,4 +69,4 @@ DEPENDENCIES
   subroutine-factory!
 
 BUNDLED WITH
-  4.0.3
+  4.0.5
