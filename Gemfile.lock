@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     subroutine-factory (0.3.0)
-      activesupport (>= 3.0)
+      activesupport (>= 6.1)
       subroutine
 
 GEM
