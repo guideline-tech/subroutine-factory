@@ -27,10 +27,11 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*"] + Dir["*.gemspec"] + Dir["bin/**/*"]
   spec.bindir        = "bin"
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.required_ruby_version = ">= 3.2.0"
   spec.require_paths = ["lib"]
 
   spec.add_dependency "subroutine"
-  spec.add_dependency "activesupport", ">= 3.0"
+  spec.add_dependency "activesupport", ">= 6.1"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
