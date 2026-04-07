@@ -47,7 +47,7 @@ GEM
     rake (13.3.1)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    subroutine (4.5.0)
+    subroutine (4.6.0)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
       base64
@@ -89,7 +89,7 @@ CHECKSUMS
   rake (13.3.1) sha256=8c9e89d09f66a26a01264e7e3480ec0607f0c497a861ef16063604b1b08eb19c
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
-  subroutine (4.5.0) sha256=6868cde4c51a100b256aba558f52e4a44aa4e8451b5f755b12fa5495ee4f1df5
+  subroutine (4.6.0) sha256=de7b857ab9b585830b8ce71bc8670ae80d1fd9387412fb69bc52a9af015a3d77
   subroutine-factory (0.4.0)
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   uri (1.1.1) sha256=379fa58d27ffb1387eaada68c749d1426738bd0f654d812fcc07e7568f5c57c6
