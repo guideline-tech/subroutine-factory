@@ -68,7 +68,7 @@ GEM
       io-console (~> 0.5)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    subroutine (4.7.0)
+    subroutine (4.7.1)
       activemodel (>= 8.0)
       activesupport (>= 8.0)
       base64
@@ -121,7 +121,7 @@ CHECKSUMS
   reline (0.6.3) sha256=1198b04973565b36ec0f11542ab3f5cfeeec34823f4e54cebde90968092b1835
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
-  subroutine (4.7.0) sha256=da73a22a3df0aa17cd51d8af7fdc52a5400b3fc4ba4a9bdfc8d250327bf1ea82
+  subroutine (4.7.1) sha256=748f05ad547935f3be98502c149d97631067653ad13bd97e3009917a4b355ef3
   subroutine-factory (0.5.1)
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
