@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    subroutine-factory (0.5.1)
+    subroutine-factory (0.6.0)
       activesupport (>= 8.1)
       subroutine
 
@@ -122,7 +122,7 @@ CHECKSUMS
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   subroutine (4.7.1) sha256=748f05ad547935f3be98502c149d97631067653ad13bd97e3009917a4b355ef3
-  subroutine-factory (0.5.1)
+  subroutine-factory (0.6.0)
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   uri (1.1.1) sha256=379fa58d27ffb1387eaada68c749d1426738bd0f654d812fcc07e7568f5c57c6
