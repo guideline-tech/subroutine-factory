@@ -7,8 +7,8 @@ require "subroutine/factory/version"
 Gem::Specification.new do |spec|
   spec.name          = "subroutine-factory"
   spec.version       = Subroutine::Factory::VERSION
-  spec.authors       = ["Mike Nelson"]
-  spec.email         = ["mike@mnelson.io"]
+  spec.authors       = ["Gusto"]
+  spec.email         = ["gusto-opensource-buildkite@gusto.com"]
 
   spec.summary       = "Test factories for ops using Subroutine Ops"
   spec.description   = "Test factories for ops using Subroutine Ops"
